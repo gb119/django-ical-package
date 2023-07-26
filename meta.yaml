@@ -1,0 +1,46 @@
+{% set name = "django-ical" %}
+{% set version = "1.9.2" %}
+
+package:
+  name: {{ name|lower }}
+  version: {{ version }}
+
+source:
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/django-ical-{{ version }}.tar.gz
+  sha256: 44c9b6fa90d09f25e9ebaa91ed9eb007f079afbc23d6aac909cfc18188a8e90c
+
+build:
+  noarch: python
+  script: {{ PYTHON }} -m pip install . -vv
+  number: 0
+
+requirements:
+  host:
+    - python
+    - setuptools >=30.3.0
+    - wheel
+    - setuptools-scm
+    - pip
+  run:
+    - python
+    - django >=3.2
+    - icalendar >=4.0.3
+    - django-recurrence >=1.11.1
+
+test:
+  imports:
+    - django_ical
+  commands:
+    - pip check
+  requires:
+    - pip
+
+about:
+  home: https://github.com/jazzband/django-ical
+  summary: iCal feeds for Django based on Django's syndication feed framework.
+  license: MIT
+  license_file: LICENSE
+
+extra: https://github.com/gb119
+  recipe-maintainers:
+    - 
